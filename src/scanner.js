@@ -13,7 +13,13 @@ export function isUsdtPair(symbol) {
 export async function scanWatchlist() {
   const cfg = loadConfig();
   const assets = getAssets();
-  const symbols = [...new Set(assets.filter((a) => a.watch === 1).map((a) => a.symbol))];
+  const symbols = [
+    ...new Set(
+      assets
+        .filter((a) => a.watch === 1 && a.type !== 'stable')
+        .map((a) => a.symbol)
+    ),
+  ];
 
   const [prices, tickers] = await Promise.all([fetchAllPrices(), fetch24hAll()]);
   const tickerMap = {};

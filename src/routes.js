@@ -89,8 +89,13 @@ export function createRouter() {
   });
 
   router.get('/scanner/top-movers', async (req, res) => {
-    const movers = await refreshTopMovers();
-    res.json({ movers, ts: getMeta('topMoversLastTs') });
+    try {
+      const movers = await refreshTopMovers();
+      res.json({ movers, ts: getMeta('topMoversLastTs') });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.message });
+    }
   });
 
   router.get('/scanner/candidate-day', (req, res) => {
@@ -239,14 +244,19 @@ export function createRouter() {
   // ---- Prices ----
 
   router.get('/prices', async (req, res) => {
-    const prices = await fetchAllPrices();
-    const requested = (req.query.symbols || '').split(',').filter(Boolean);
-    if (requested.length) {
-      const out = {};
-      for (const s of requested) out[s] = prices[`${s}USDT`] ?? null;
-      res.json(out);
-    } else {
-      res.json(prices);
+    try {
+      const prices = await fetchAllPrices();
+      const requested = (req.query.symbols || '').split(',').filter(Boolean);
+      if (requested.length) {
+        const out = {};
+        for (const s of requested) out[s] = prices[`${s}USDT`] ?? null;
+        res.json(out);
+      } else {
+        res.json(prices);
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err.message });
     }
   });
 
@@ -260,7 +270,14 @@ export function createRouter() {
     });
     res.write('event: ready\ndata: {}\n\n');
     notifier.addClient(res);
-    const hb = setInterval(() => res.write(': ping\n\n'), 30000);
+    const hb = setInterval(() => {
+      try {
+        res.write(': ping\n\n');
+      } catch {
+        clearInterval(hb);
+        res.destroy();
+      }
+    }, 30000);
     res.on('close', () => clearInterval(hb));
   });
 

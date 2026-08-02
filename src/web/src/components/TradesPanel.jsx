@@ -106,13 +106,13 @@ export default function TradesPanel() {
           <tbody>
             {trades.map((t) => (
               <tr key={t.id}>
-                <td>{t.date}</td>
+                <td className="nowrap">{t.date}</td>
                 <td className="strong">{t.symbol}</td>
                 <td className={t.side === 'BUY' ? 'pos' : 'neg'}>{t.side}</td>
                 <td>{t.quantity}</td>
                 <td>${t.unit_price}</td>
                 <td>${t.total_value.toFixed(4)}</td>
-                <td className="muted small">{t.notes || ''}</td>
+                <td className="muted small notes-cell" title={t.notes || ''}>{t.notes || ''}</td>
                 <td>
                   <button className="btn small" onClick={() => startEdit(t)}>Edit</button>{' '}
                   <button className="btn small danger" onClick={() => remove(t.id)}>Delete</button>

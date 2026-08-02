@@ -42,9 +42,7 @@ function main() {
   const cfg = loadConfig();
   getDb();
   restoreIfNeeded();
-  seedAssets();
-
-  const app = express();
+  seedAssets();  const app = express();
   app.use(express.json());
 
   app.use('/api', createRouter());
@@ -83,5 +81,12 @@ function main() {
     snapshot();
   }
 }
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[index] unhandledRejection:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('[index] uncaughtException:', err);
+});
 
 main();

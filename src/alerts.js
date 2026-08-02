@@ -47,7 +47,9 @@ class Notifier {
       await fetch(al.discordWebhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ embeds: [embed] }),
+        body: JSON.stringify({
+          embeds: [embed],
+        }),
       });
     } catch (err) {
       console.error('[alerts] discord send failed:', err.message);
