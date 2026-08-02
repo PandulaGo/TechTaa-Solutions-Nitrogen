@@ -141,3 +141,12 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local app config (contains Discord webhook URL, PC paths)
+src/appsettings.json
+
+# Local TLS certificates (self-signed for HTTPS ports)
+src/certs/
+
+# Local app data (SQLite db, imported spreadsheets)
+src/data/
