@@ -1,7 +1,7 @@
 import { loadConfig } from './config.js';
 import { getDb, getAssets, getPositions, getMeta, setMeta, recordPrice } from './db.js';
 import { fetchAllPrices, fetch24hAll, fetchKlines } from './binance.js';
-import { buildVerdict, scoreSignal } from './indicators.js';
+import { buildVerdict, scoreSignal, scoreBreakdown } from './indicators.js';
 
 const scanCache = { ts: 0, verdicts: {}, prices: {}, tickers: {} };
 
@@ -103,8 +103,22 @@ export function computeCandidates() {
     .sort((a, b) => b.score - a.score)
     .slice(0, cfg.candidateOfDayCount);
 
-  setMeta('candidates', candidates.map((c) => ({ symbol: c.symbol, held: c.held, score: c.score, verdict: c.v.verdict })));
-  return candidates.map((c) => ({ symbol: c.symbol, held: c.held, score: c.score, verdict: c.v.verdict }));
+  const shape = (c) => ({
+    symbol: c.symbol,
+    held: c.held,
+    score: c.score,
+    verdict: c.v.verdict,
+    trend: c.v.trend ?? null,
+    rsi: c.v.rsi ?? null,
+    mom4h: c.v.mom4h ?? null,
+    mom24h: c.v.mom24h ?? null,
+    volumeSpike: c.v.volumeSpike ?? null,
+    price: c.v.price ?? null,
+    scoreDetail: scoreBreakdown(c.v.mom4h ?? null, c.v.volumeSpike ?? null, c.v.rsi ?? null),
+  });
+
+  setMeta('candidates', candidates.map(shape));
+  return candidates.map(shape);
 }
 
 // Evaluate signals for one asset given its verdict + position. Returns signal objects.
@@ -132,6 +146,8 @@ export function evaluateSignals(asset, v, position) {
         message: `${asset.symbol} is pumping (${v.mom4h.toFixed(1)}% in 4h, volume ${v.volumeSpike.toFixed(1)}x). Short-term buy opportunity.`,
         price,
         target_price: price * 1.05,
+        mom4h: v.mom4h,
+        volumeSpike: v.volumeSpike,
       });
     }
 
@@ -145,6 +161,9 @@ export function evaluateSignals(asset, v, position) {
           message: `${asset.symbol} is up ${gainPct.toFixed(1)}% above your average buy. Target ${targetPct}% reached — take profit now.`,
           price,
           target_price: position.avgBuy * (1 + targetPct / 100),
+          avgBuy: position.avgBuy,
+          gainPct,
+          targetPct,
         });
       }
       if (asset.type === 'meme') {
@@ -155,6 +174,9 @@ export function evaluateSignals(asset, v, position) {
             severity: 'alert',
             message: `${asset.symbol} is down ${Math.abs(gainPct).toFixed(1)}% (stop loss ${slPct}%). Consider cutting losses.`,
             price,
+            avgBuy: position.avgBuy,
+            gainPct,
+            slPct,
           });
         }
       }
@@ -165,6 +187,8 @@ export function evaluateSignals(asset, v, position) {
           message: `${asset.symbol} reached your break-even price (${position.avgBuy.toFixed(4)}). You're back to even.`,
           price,
           target_price: position.avgBuy,
+          avgBuy: position.avgBuy,
+          gainPct: ((price - position.avgBuy) / position.avgBuy) * 100,
         });
       }
     }
@@ -188,16 +212,19 @@ export function evaluateSignals(asset, v, position) {
             message: `${asset.symbol} fell ${tsPct}% from its high of ${state.high_price.toFixed(4)}. Lock in gains now.`,
             price,
             target_price: state.high_price * (1 - tsPct / 100),
+            highPrice: state.high_price,
+            trailPct: tsPct,
           });
         }
       }
     }
 
     if (v.rsi != null) {
+      const rsiCtx = { avgBuy: position?.avgBuy ?? null };
       if (v.rsi >= sc.rsiOverbought) {
-        signals.push({ type: 'OVERBOUGHT', severity: 'warning', message: `${asset.symbol} RSI ${v.rsi.toFixed(0)} — overbought, pullback likely.`, price });
+        signals.push({ type: 'OVERBOUGHT', severity: 'warning', message: `${asset.symbol} RSI ${v.rsi.toFixed(0)} — overbought, pullback likely.`, price, rsi: v.rsi, ...rsiCtx });
       } else if (asset.type === 'meme' && v.rsi <= sc.rsiOversold) {
-        signals.push({ type: 'OVERSOLD', severity: 'info', message: `${asset.symbol} RSI ${v.rsi.toFixed(0)} — oversold, watch for a bounce.`, price });
+        signals.push({ type: 'OVERSOLD', severity: 'info', message: `${asset.symbol} RSI ${v.rsi.toFixed(0)} — oversold, watch for a bounce.`, price, rsi: v.rsi, ...rsiCtx });
       }
     }
   }

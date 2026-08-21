@@ -9,6 +9,7 @@ import { buildVerdict, scoreSignal } from './indicators.js';
 import { getScanCache, scanWatchlist, refreshTopMovers, computeCandidates, evaluateSignals } from './scanner.js';
 import { notifier } from './alerts.js';
 import { snapshot } from './backup.js';
+import { explainVerdict, explainCandidate } from './explanations.js';
 
 export function createRouter() {
   const router = express.Router();
@@ -81,9 +82,13 @@ export function createRouter() {
 
   router.get('/scanner', (req, res) => {
     const cache = getScanCache();
+    const includeExpl = cfg.alerts.includeExplanations;
     res.json({
       ts: cache.ts,
-      verdicts: Object.values(cache.verdicts),
+      verdicts: Object.values(cache.verdicts).map((v) => ({
+        ...v,
+        ...(includeExpl ? { explain: explainVerdict(v) } : {}),
+      })),
       positions: getPositions().map((p) => p.symbol),
     });
   });
@@ -100,7 +105,14 @@ export function createRouter() {
 
   router.get('/scanner/candidate-day', (req, res) => {
     const candidates = computeCandidates();
-    res.json({ candidates, ts: Date.now() });
+    const includeExpl = cfg.alerts.includeExplanations;
+    res.json({
+      candidates: candidates.map((c) => ({
+        ...c,
+        ...(includeExpl ? { explain: explainCandidate(c) } : {}),
+      })),
+      ts: Date.now(),
+    });
   });
 
   router.get('/signals', (req, res) => {

@@ -34,12 +34,13 @@ export default function SettingsPanel() {
   }
 
   return (
-    <div className="card">
-      <div className="card-head">
-        <h2>Asset settings</h2>
-        <span className="muted">controls which coins the scanner watches and how alerts behave</span>
-      </div>
-      {msg && <p>{msg}</p>}
+    <>
+      <div className="card">
+        <div className="card-head">
+          <h2>Asset settings</h2>
+          <span className="muted">controls which coins the scanner watches and how alerts behave</span>
+        </div>
+        {msg && <p>{msg}</p>}
 
       <div className="table-wrap">
         <table>
@@ -118,5 +119,49 @@ export default function SettingsPanel() {
         Core coins: alert when price returns to break-even (your real average cost).
       </p>
     </div>
+
+    <div className="card">
+      <div className="card-head">
+        <h2>How these settings work</h2>
+        <span className="muted">what each one does — in plain words</span>
+      </div>
+      <div className="settings-help">
+        <div className="help-box">
+          <div className="help-title">🎯 Profit target %</div>
+          <div className="help-text">
+            The gain you want before taking profit. When a coin rises this much <b>above your average buy price</b>, the app sends a{' '}
+            <b>TAKE PROFIT</b> alert telling you to sell some and lock in the gain.
+          </div>
+          <div className="help-example">
+            Example: you buy at $1.00 and set target 20% → the app warns you when the price reaches <b>$1.20</b>.
+          </div>
+        </div>
+        <div className="help-box">
+          <div className="help-title">🪝 Trailing stop %</div>
+          <div className="help-text">
+            A safety net that <b>follows the price up</b>. The app remembers the highest price your coin reached. If the price then falls
+            this much below that high, it sends a <b>TRAILING STOP</b> alert — "sell now to protect the gains." It moves up with the price but never down.
+          </div>
+          <div className="help-example">
+            Example: price climbs to $1.20, trailing stop 15% → sell alert if it drops to <b>$1.02</b>.
+          </div>
+        </div>
+        <div className="help-box">
+          <div className="help-title">🛑 Stop loss %</div>
+          <div className="help-text">
+            Your emergency brake. If the price falls this much <b>below your average buy price</b>, the app sends a <b>CUT LOSS</b> alert
+            telling you to sell so the loss doesn't grow bigger.
+          </div>
+          <div className="help-example">
+            Example: you buy at $1.00 and set stop loss 20% → the app warns you at <b>$0.80</b>.
+          </div>
+        </div>
+      </div>
+      <p className="muted small">
+        These are <b>alerts and advice only</b> — the app never trades for you. You read the message, decide, and place the order on Binance yourself.
+        Values here apply per coin; if a coin has no value, the app falls back to the defaults in <code>appsettings.json</code>.
+      </p>
+      </div>
+    </>
   );
 }

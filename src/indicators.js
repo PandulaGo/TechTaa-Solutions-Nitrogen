@@ -178,3 +178,28 @@ export function scoreSignal(closes, rsiVal, mom4h, spike) {
   }
   return s;
 }
+
+export function scoreBreakdown(mom4h, spike, rsiVal) {
+  const parts = [];
+  if (mom4h != null) {
+    const sign = mom4h >= 0 ? '+' : '';
+    if (mom4h >= 5) parts.push(`4h momentum ${sign}${mom4h.toFixed(1)}% → +2 points (rose 5% or more in the last 4 hours)`);
+    else if (mom4h >= 1) parts.push(`4h momentum ${sign}${mom4h.toFixed(1)}% → +1 point (rose between 1% and 5% in the last 4 hours)`);
+    else if (mom4h <= -5) parts.push(`4h momentum ${sign}${mom4h.toFixed(1)}% → −2 points (fell 5% or more in the last 4 hours)`);
+    else if (mom4h <= -1) parts.push(`4h momentum ${sign}${mom4h.toFixed(1)}% → −1 point (fell between 1% and 5% in the last 4 hours)`);
+    else parts.push(`4h momentum ${sign}${mom4h.toFixed(1)}% → 0 points (moved less than 1% — neutral)`);
+  }
+  if (spike != null) {
+    parts.push(
+      spike >= 1.5
+        ? `Volume ${spike.toFixed(1)}x → +1 point (traded ${spike.toFixed(1)}x more than usual — real interest)`
+        : `Volume ${spike.toFixed(1)}x → 0 points (below the 1.5x threshold)`
+    );
+  }
+  if (rsiVal != null) {
+    if (rsiVal >= 45 && rsiVal <= 65) parts.push(`RSI ${rsiVal.toFixed(0)} → +1 point (healthy 45–65 range — rising but not overextended)`);
+    else if (rsiVal >= 75) parts.push(`RSI ${rsiVal.toFixed(0)} → −1 point (overbought above 75 — pullback risk)`);
+    else parts.push(`RSI ${rsiVal.toFixed(0)} → 0 points (outside the healthy 45–65 range)`);
+  }
+  return parts;
+}

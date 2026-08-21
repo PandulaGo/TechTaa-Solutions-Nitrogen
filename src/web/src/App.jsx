@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import SummaryBar from './components/SummaryBar.jsx';
 import PortfolioTable from './components/PortfolioTable.jsx';
+import SellSimulator from './components/SellSimulator.jsx';
 import ScannerPanel from './components/ScannerPanel.jsx';
 import TradesPanel from './components/TradesPanel.jsx';
 import SettingsPanel from './components/SettingsPanel.jsx';
@@ -20,8 +21,17 @@ async function api(path, options) {
   return res.json();
 }
 
+function getInitialLayout() {
+  try {
+    const saved = localStorage.getItem('layout');
+    if (saved === 'dashboard' || saved === 'tabs') return saved;
+  } catch {}
+  return window.innerWidth >= 1500 ? 'dashboard' : 'tabs';
+}
+
 export default function App() {
   const [tab, setTab] = useState('Portfolio');
+  const [layout, setLayout] = useState(getInitialLayout);
   const [portfolio, setPortfolio] = useState(null);
   const [scanner, setScanner] = useState(null);
   const [toasts, setToasts] = useState([]);
@@ -86,29 +96,74 @@ export default function App() {
     };
   }, []);
 
+  const toggleLayout = () => {
+    setLayout((prev) => {
+      const next = prev === 'tabs' ? 'dashboard' : 'tabs';
+      try { localStorage.setItem('layout', next); } catch {}
+      return next;
+    });
+  };
+
   return (
-    <div className="app">
+    <div className={`app ${layout === 'dashboard' ? 'layout-dashboard' : ''}`}>
       <header className="topbar">
         <h1>Crypto Income Assistant</h1>
         <nav>
-          {TABS.map((t) => (
-            <button key={t} className={tab === t ? 'tab active' : 'tab'} onClick={() => setTab(t)}>
-              {t}
-            </button>
-          ))}
+          {layout === 'tabs' ? (
+            TABS.map((t) => (
+              <button key={t} className={tab === t ? 'tab active' : 'tab'} onClick={() => setTab(t)}>
+                {t}
+              </button>
+            ))
+          ) : (
+            <span className="muted" style={{ fontSize: 12 }}>all panels</span>
+          )}
+          <button
+            className="tab"
+            title={layout === 'tabs' ? 'Switch to dashboard view' : 'Switch to tab view'}
+            onClick={toggleLayout}
+          >
+            {layout === 'tabs' ? '⊞ Grid' : '≡ Tabs'}
+          </button>
         </nav>
       </header>
 
       <main>
-        {tab === 'Portfolio' && (
+        {layout === 'tabs' ? (
           <>
-            <SummaryBar totals={portfolio?.totals} />
-            <PortfolioTable rows={portfolio?.rows || []} />
+            {tab === 'Portfolio' && (
+              <>
+                <SummaryBar totals={portfolio?.totals} />
+                <PortfolioTable rows={portfolio?.rows || []} />
+                <SellSimulator rows={portfolio?.rows || []} />
+              </>
+            )}
+            {tab === 'Scanner' && <ScannerPanel scanner={scanner} />}
+            {tab === 'Trades' && <TradesPanel />}
+            {tab === 'Settings' && <SettingsPanel />}
+          </>
+        ) : (
+          <>
+            <div className="dash-section">
+              <SummaryBar totals={portfolio?.totals} />
+            </div>
+            <div className="dash-grid">
+              <div className="dash-col">
+                <PortfolioTable rows={portfolio?.rows || []} />
+                <SellSimulator rows={portfolio?.rows || []} />
+              </div>
+              <div className="dash-col">
+                <ScannerPanel scanner={scanner} />
+              </div>
+              <div className="dash-col">
+                <TradesPanel />
+              </div>
+              <div className="dash-col">
+                <SettingsPanel />
+              </div>
+            </div>
           </>
         )}
-        {tab === 'Scanner' && <ScannerPanel scanner={scanner} />}
-        {tab === 'Trades' && <TradesPanel />}
-        {tab === 'Settings' && <SettingsPanel />}
       </main>
 
       <Toasts toasts={toasts} />

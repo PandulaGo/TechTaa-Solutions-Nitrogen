@@ -45,6 +45,12 @@ export default function ScannerPanel({ scanner }) {
             {scanner ? `updated ${new Date(scanner.ts).toLocaleTimeString()}` : ''}
           </span>
         </div>
+        <div className="legend">
+          <span><span className="dot" style={{ background: '#22c55e' }} /> strong buy candidate</span>
+          <span><span className="dot" style={{ background: '#84cc16' }} /> slight bullish</span>
+          <span><span className="dot" style={{ background: '#94a3b8' }} /> neutral</span>
+          <span><span className="dot" style={{ background: '#f87171' }} /> avoid / falling</span>
+        </div>
         {verdicts.map((v) => (
           <div key={v.symbol} className="verdict-row">
             <span
@@ -59,6 +65,7 @@ export default function ScannerPanel({ scanner }) {
                 {v.rsiLabel === 'oversold' && <span className="flag flag-cut-loss">oversold</span>}
               </div>
               <div className="muted">{v.verdict}</div>
+              {v.explain && <div className="explain">{v.explain}</div>}
             </div>
           </div>
         ))}
@@ -75,6 +82,7 @@ export default function ScannerPanel({ scanner }) {
             <span className="muted">{c.held ? 'held' : 'watch'}</span>
             <span className="score">score {c.score}</span>
             <div className="muted small">{c.verdict}</div>
+            {c.explain && <div className="explain">{c.explain}</div>}
           </div>
         ))}
         {!candidates.length && (
