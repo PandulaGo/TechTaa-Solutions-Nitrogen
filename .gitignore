@@ -150,3 +150,13 @@ src/certs/
 
 # Local app data (SQLite db, imported spreadsheets)
 src/data/
+
+# Database files
+# SQL Server LocalDB / MDF
+*.mdf
+*.ldf
+# SQLite (if used later)
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
