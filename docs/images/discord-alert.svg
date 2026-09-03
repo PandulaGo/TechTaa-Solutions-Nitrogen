@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#313338"/>
+      <stop offset="100%" stop-color="#2b2d31"/>
+    </linearGradient>
+    <linearGradient id="embed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b2d31"/>
+      <stop offset="100%" stop-color="#232428"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="560" fill="url(#bg)"/>
+
+  <!-- Channel header -->
+  <text x="40" y="44" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#f2f3f5"># crypto-alerts</text>
+  <text x="40" y="70" font-family="Segoe UI, sans-serif" font-size="13" fill="#949ba4">Crypto Income Assistant</text>
+
+  <!-- Embed -->
+  <rect x="40" y="90" width="820" height="440" rx="8" fill="url(#embed)"/>
+  <rect x="40" y="90" width="4" height="440" fill="#f87171"/>
+
+  <!-- Title -->
+  <text x="64" y="126" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#f2f3f5">🔴 POL — CUT LOSS</text>
+
+  <!-- Message -->
+  <text x="64" y="156" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">POL is down 61.7% (stop loss 20%). Consider cutting losses.</text>
+
+  <!-- Advice field -->
+  <text x="64" y="196" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">💡 What to do</text>
+  <text x="64" y="220" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">🔴 SELL 50% = 165.0379 POL (≈ $12.03)</text>
+  <text x="64" y="242" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">Price is 61.7% below your buy ($0.2319) — far past your 20% stop-loss.</text>
+  <text x="64" y="260" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">Sell half now to limit the damage; keep the rest only if you genuinely</text>
+  <text x="64" y="278" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">expect a rebound.</text>
+
+  <!-- Inline fields: Qty / Avg buy -->
+  <text x="64" y="318" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">Qty</text>
+  <text x="64" y="338" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">330.0758 POL</text>
+
+  <text x="220" y="318" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">Avg buy</text>
+  <text x="220" y="338" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">$0.2319</text>
+
+  <!-- Inline fields: Current price / Target -->
+  <text x="64" y="378" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">Current price</text>
+  <text x="64" y="398" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">$0.088890</text>
+
+  <text x="220" y="378" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">Target</text>
+  <text x="220" y="398" font-family="Segoe UI, sans-serif" font-size="13" fill="#dbdee1">—</text>
+
+  <!-- Explanation field -->
+  <text x="64" y="438" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#f2f3f5">📚 What this means</text>
+  <text x="64" y="462" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">A stop-loss alert fires when a coin drops below your set threshold.</text>
+  <text x="64" y="480" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">It's a warning to reduce risk — not a guarantee the price will fall</text>
+  <text x="64" y="498" font-family="Segoe UI, sans-serif" font-size="12" fill="#b5bac1">further. Selling part of your position limits potential losses.</text>
+
+  <!-- Timestamp -->
+  <text x="64" y="522" font-family="Segoe UI, sans-serif" font-size="11" fill="#949ba4">Today at 10:30 PM</text>
+</svg>

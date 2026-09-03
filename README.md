@@ -164,6 +164,28 @@ http://127.0.0.1:10065
 
 ---
 
+## Screenshots
+
+### Dashboard
+
+The main dashboard shows your portfolio summary cards, positions table, and coin cards with live prices, PnL, and break-even.
+
+![Dashboard](docs/images/dashboard.svg)
+
+### Sell Simulator
+
+The "What happens if I sell X%" calculator shows every result with its live formula using your real numbers.
+
+![Sell Simulator](docs/images/sell-simulator.svg)
+
+### Discord Alert
+
+Alerts sent to Discord include the signal, rule-based advice, your position details, and a plain-English explanation.
+
+![Discord Alert](docs/images/discord-alert.svg)
+
+---
+
 ## Configuration
 
 All settings live in `src/appsettings.json`. Key sections:

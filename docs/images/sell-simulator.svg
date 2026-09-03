@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1420"/>
+      <stop offset="100%" stop-color="#171e2e"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2738"/>
+      <stop offset="100%" stop-color="#171e2e"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg)"/>
+
+  <!-- Card header -->
+  <rect x="24" y="24" width="1152" height="672" rx="12" fill="url(#card)" stroke="#2a3550"/>
+  <text x="40" y="56" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#e6ebf5">Sell simulator</text>
+  <text x="180" y="56" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">what happens if you sell X%</text>
+
+  <!-- Left column: controls -->
+  <text x="40" y="100" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">Coin</text>
+  <rect x="40" y="110" width="280" height="36" rx="8" fill="#1e2738" stroke="#2a3550"/>
+  <text x="56" y="133" font-family="Segoe UI, sans-serif" font-size="13" fill="#e6ebf5">WLD — -78.0%</text>
+  <text x="300" y="133" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">▼</text>
+
+  <text x="40" y="180" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">Sell %</text>
+  <line x1="40" y1="210" x2="240" y2="210" stroke="#2a3550" stroke-width="4"/>
+  <circle cx="140" cy="210" r="8" fill="#60a5fa"/>
+  <rect x="260" y="196" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="290" y="215" font-family="Segoe UI, sans-serif" font-size="13" fill="#e6ebf5" text-anchor="middle">50</text>
+  <text x="40" y="240" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">= 20 WLD ($6.46)</text>
+
+  <text x="40" y="280" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">Break-even target — be down only this % after recovery</text>
+  <line x1="40" y1="310" x2="240" y2="310" stroke="#2a3550" stroke-width="4"/>
+  <circle cx="80" cy="310" r="8" fill="#60a5fa"/>
+  <rect x="260" y="296" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="290" y="315" font-family="Segoe UI, sans-serif" font-size="13" fill="#e6ebf5" text-anchor="middle">20</text>
+  <text x="40" y="340" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">price needed: $1.4342</text>
+
+  <text x="40" y="380" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">What if the price later reaches…</text>
+  <rect x="40" y="390" width="140" height="32" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="56" y="411" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">0.16</text>
+  <rect x="40" y="432" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="70" y="450" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" text-anchor="middle">-50%</text>
+  <rect x="108" y="432" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="138" y="450" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" text-anchor="middle">-25%</text>
+  <rect x="176" y="432" width="70" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="211" y="450" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" text-anchor="middle">current</text>
+  <rect x="254" y="432" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="284" y="450" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" text-anchor="middle">+25%</text>
+  <rect x="322" y="432" width="60" height="28" rx="6" fill="#1e2738" stroke="#2a3550"/>
+  <text x="352" y="450" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" text-anchor="middle">+50%</text>
+
+  <!-- Summary note -->
+  <rect x="40" y="490" width="340" height="150" rx="10" fill="#1e2738" stroke="#2a3550"/>
+  <rect x="40" y="490" width="3" height="150" fill="#fbbf24"/>
+  <text x="56" y="516" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">Selling cuts how much of your money is</text>
+  <text x="56" y="534" font-family="Segoe UI, sans-serif" font-size="12" fill="#e6ebf5" font-weight="600">exposed</text>
+  <text x="56" y="534" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab"> to this coin — it does not change the</text>
+  <text x="56" y="552" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">loss % on the coins you keep, and it does</text>
+  <text x="56" y="570" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">not change your overall result: cash + coins</text>
+  <text x="56" y="588" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">still equals today's total value. The only way</text>
+  <text x="56" y="606" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">to bring the percentage back up is for the</text>
+  <text x="56" y="624" font-family="Segoe UI, sans-serif" font-size="12" fill="#8b96ab">price to rise (see the break-even price above).</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="80" x2="400" y2="680" stroke="#2a3550"/>
+
+  <!-- Right column: results -->
+  <text x="420" y="100" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">Current position — WLD @ $0.3940</text>
+
+  <!-- Loss right now -->
+  <text x="420" y="140" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Loss right now</text>
+  <text x="700" y="140" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#f87171">-78.0% (-$55.95)</text>
+  <rect x="420" y="150" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="166" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">(price − avgBuy) ÷ avgBuy × 100 = (0.3940 − 1.7928) ÷ 1.7928 × 100 = -78.0%</text>
+  <line x1="420" y1="186" x2="1140" y2="186" stroke="#2a3550"/>
+
+  <!-- Sell 50% now -->
+  <text x="420" y="216" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">Sell 50% now</text>
+
+  <text x="420" y="246" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Coins sold</text>
+  <text x="700" y="246" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">20 WLD</text>
+  <rect x="420" y="256" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="272" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">qty × sell% ÷ 100 = 40 × 50 ÷ 100 = 20</text>
+
+  <text x="420" y="306" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Cash you'd get</text>
+  <text x="700" y="306" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">$6.46</text>
+  <rect x="420" y="316" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="332" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">sellQty × price = 20 × 0.3940 = $6.46</text>
+
+  <text x="420" y="366" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Realized loss locked in</text>
+  <text x="700" y="366" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#f87171">-$27.98</text>
+  <rect x="420" y="376" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="392" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">(price − avgBuy) × sellQty = (0.3940 − 1.7928) × 20 = -$27.98</text>
+
+  <text x="420" y="426" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Coins kept</text>
+  <text x="700" y="426" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">20 WLD</text>
+  <rect x="420" y="436" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="452" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">qty − sellQty = 40 − 20 = 20</text>
+
+  <text x="420" y="486" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Value of kept coins</text>
+  <text x="700" y="486" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">$6.46</text>
+  <rect x="420" y="496" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="512" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">keptQty × price = 20 × 0.3940 = $6.46</text>
+
+  <text x="420" y="546" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Loss still on kept coins</text>
+  <text x="700" y="546" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#f87171">-$27.98 (-78.0%)</text>
+  <rect x="420" y="556" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="572" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">(price − avgBuy) × keptQty = (0.3940 − 1.7928) × 20 = -$27.98</text>
+
+  <!-- After the sale -->
+  <text x="420" y="616" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">After the sale — your total</text>
+
+  <text x="420" y="646" font-family="Segoe UI, sans-serif" font-size="13" fill="#8b96ab">Total (cash + kept coins)</text>
+  <text x="700" y="646" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e6ebf5">$12.93</text>
+  <rect x="420" y="656" width="720" height="24" rx="6" fill="#171e2e"/>
+  <text x="432" y="672" font-family="Consolas, monospace" font-size="11" fill="#8b96ab">cash + keptValue = $6.46 + $6.46 = $12.93</text>
+</svg>
